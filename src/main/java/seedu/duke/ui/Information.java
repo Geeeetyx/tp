@@ -19,7 +19,7 @@ import static seedu.duke.save.Storage.saveData;
 //@@author JeraldChen
 public class Information {
     //@@author Geeeetyx
-    private static final ArrayList<String> queueList = new ArrayList<>();
+    private static final ArrayList<Integer> queueList = new ArrayList<>();
     //@@author
 
     private static final HashMap<Integer, Patient> patientsList = new HashMap<>();
@@ -37,7 +37,7 @@ public class Information {
         return patientsList.get(hash);
     }
 
-    //@@Geeeetyx
+    //@@author Geeeetyx
 
     /**
      * Prints the diagnosis history of the Patient.
@@ -78,7 +78,7 @@ public class Information {
         saveData();
     }
 
-    //@@Thunderdragon221
+    //@@author Thunderdragon221
 
     /**
      * Checks the existence of a password in Dr Duke.
@@ -101,7 +101,7 @@ public class Information {
         return patientsList;
     }
 
-    //@@Thunderdragon221
+    //@@author Thunderdragon221
 
     /**
      * Hashes the password keyed in by the user.
@@ -112,7 +112,7 @@ public class Information {
         return password.hashCode();
     }
 
-    //@@Jeraldchen
+    //@@author Jeraldchen
 
     /**
      * Resets the symptom choice of the patient.
@@ -188,12 +188,13 @@ public class Information {
     }
 
     //@@author Geeeetyx
-    public static ArrayList<String> getQueueList() {
+    public static ArrayList<Integer> getQueueList() {
         return queueList;
     }
 
     public static void addToQueue(String password) {
-        queueList.add(password);
+        int hash = Information.hashPassword(password);
+        queueList.add(hash);
     }
 
     public static void printPatientQueueNumber() {

@@ -296,8 +296,8 @@ public class Storage {
     public static void saveQueue() {
         try {
             FileWriter writer = new FileWriter(QUEUE_FILE_PATH);
-            ArrayList<String> queueList = Information.getQueueList();
-            for (String currentQueueNumber : queueList) {
+            ArrayList<Integer> queueList = Information.getQueueList();
+            for (int currentQueueNumber : queueList) {
                 writer.write(currentQueueNumber + "\n");
             }
 

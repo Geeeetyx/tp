@@ -1,10 +1,15 @@
 49
 Demo
-5
+10
+Bronchitis
 Sore Throat
 Fever
+Headache
 COVID-19
+Bronchitis
 Sore Throat
 Fever
+Headache
+COVID-19
 1
-2023/04/02 Lozenges Difflam Throat Spray Paracetamol 
+2023/04/02 Guaifenesin Ibuprofen Lozenges Difflam Throat Spray Paracetamol 
