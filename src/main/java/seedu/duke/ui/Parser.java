@@ -39,12 +39,13 @@ public class Parser {
     }
 
     //@@author Thunderdragon221, Geeeetyx, tanyizhe
+
     /**
      * Parses the user input for the account menu.
      *
      * @param choice Users choice of input.
-    */
-    public static void parseAccountCommand(String choice){
+     */
+    public static void parseAccountCommand(String choice) {
         assert choice != null : "Choice cannot be null";
         Patient user = Information.getPatientInfo(Duke.getPassword());
         MedicineManager medicineManager = new MedicineManager();
@@ -54,19 +55,27 @@ public class Parser {
             try {
                 //@@author tanyizhe
                 ArrayList<Symptom> symptoms = Menu.getUserSymptoms();
-                Menu.displayPossibleIllness(symptoms);
-                ArrayList<IllnessMatch> possibleIllnesses = medicineManager.analyseIllness(symptoms);
-                for (IllnessMatch illnessMatch : possibleIllnesses) {
-                    user.updatePatientDiagnosisHistory(illnessMatch.getIllness().getIllnessName());
-                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-                    LocalDateTime now = LocalDateTime.now();
-                    ArrayList<String> medicineArrayList = medicineManager
-                            .getRelevantMedicationInString(illnessMatch.getIllness().getIllnessName());
-                    if (!(medicineArrayList == null)) {
-                        user.updatePatientMedicineHistory(dtf.format(now), medicineArrayList);
+
+                //@@author Geeeetyx
+                if (symptoms.isEmpty()) {
+                    System.out.println("You have not entered any symptoms!");
+                    //@@author
+
+                } else {
+                    Menu.displayPossibleIllness(symptoms);
+                    ArrayList<IllnessMatch> possibleIllnesses = medicineManager.analyseIllness(symptoms);
+                    for (IllnessMatch illnessMatch : possibleIllnesses) {
+                        user.updatePatientDiagnosisHistory(illnessMatch.getIllness().getIllnessName());
+                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+                        LocalDateTime now = LocalDateTime.now();
+                        ArrayList<String> medicineArrayList = medicineManager
+                                .getRelevantMedicationInString(illnessMatch.getIllness().getIllnessName());
+                        if (!(medicineArrayList == null)) {
+                            user.updatePatientMedicineHistory(dtf.format(now), medicineArrayList);
+                        }
                     }
+                    saveData();
                 }
-                saveData();
             } catch (Exception e) {
                 System.out.println("Invalid input!");
             }

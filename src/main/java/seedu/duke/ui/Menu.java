@@ -156,9 +156,14 @@ public class Menu {
                 displaySymptomList();
                 addSymptomToSymptomList(scanner, symptoms);
             } else if (decision.equals("N") || decision.equals("n")) {
-                System.out.println("Your entered symptoms are: ");
-                System.out.println(symptoms);
-                break;
+                //@@author Geeeetyx
+                if (symptoms.isEmpty()) {
+                    break;
+                } else {
+                    System.out.println("Your entered symptoms are: ");
+                    System.out.println(symptoms);
+                    break;
+                }
             } else {
                 System.out.println("Invalid command! Please indicate Y/N.");
             }
