@@ -84,6 +84,30 @@ public class Parser {
             break;
         case "5":
             Information.deleteSymptom(Menu.symptoms);
+
+
+            //@@author Geeeetyx
+            ArrayList<Symptom> symptoms = Menu.symptoms;
+
+            System.out.println("---------------------------------------------------");
+            System.out.println("Below is your new diagnosis:");
+            System.out.println("---------------------------------------------------");
+
+            Menu.displayPossibleIllness(symptoms);
+            ArrayList<IllnessMatch> possibleIllnesses = medicineManager.analyseIllness(symptoms);
+            for (IllnessMatch illnessMatch : possibleIllnesses) {
+                user.updatePatientDiagnosisHistory(illnessMatch.getIllness().getIllnessName());
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+                LocalDateTime now = LocalDateTime.now();
+                ArrayList<String> medicineArrayList = medicineManager
+                        .getRelevantMedicationInString(illnessMatch.getIllness().getIllnessName());
+                if (!(medicineArrayList == null)) {
+                    user.updatePatientMedicineHistory(dtf.format(now), medicineArrayList);
+                }
+            }
+            saveData();
+            //@@author
+
             break;
         case "6":
             Information.resetSymptomChoice(Menu.symptoms);
